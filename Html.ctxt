@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Html
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Html.\r\n\ \r\n\ @author\ JKrier,\ JVogt\r\n\ @version\ Ueb07\ Prototyp\r\n
+comment1.params=test_html
+comment1.target=Html(java.lang.String)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Html\r\n
+comment2.params=
+comment2.target=void\ start()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4
