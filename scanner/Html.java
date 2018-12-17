@@ -30,7 +30,7 @@ public class Html
     
     public void start() {
         Pattern pattern =
-                Pattern.compile("<a.* href=.*>.*</a>");
+                Pattern.compile("<a.* href=.*>.*</a>");  // suche nach <a..>
         String next;
         do {
             next = in.findWithinHorizon(pattern, 0);
