@@ -1,0 +1,95 @@
+import java.io.*;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+/**
+ * Klasse LinkFilter durchsucht eine HTML Seite nach Links und deren Titeln 
+ * und speichert sie in Arrays.
+ * 
+ * @author JKrier, JVogt
+ * @version Ueb07
+ */
+public class LinkFilter{
+    private Scanner input;
+    
+    private static final int MAX = 999999;
+    private static       int anzahl = 0;
+    
+    private static String[] titel = new String[MAX];
+    private static String[] links = new String[MAX];
+     
+    /**
+      * Standard-Konstruktor
+      */
+     public LinkFilter(){
+       input = new Scanner( System.in );
+     }
+    
+    /**
+     * run: durchlaeuft die Html-Datei und findet den Titel und den Link
+     */
+    public static void run(String s){
+        int indexAnfang = 0;
+        int indexEnde = 0;
+        String temp = "";
+        indexAnfang = s.indexOf("<a href=\"",0);
+        while (indexAnfang != -1) {
+            if (indexAnfang != -1){
+                indexEnde   = s.indexOf("</a>", indexAnfang);
+                temp = s.substring(indexAnfang,indexEnde+4);
+                titel[anzahl] = findTitel(temp);
+                links[anzahl] = findLink(temp);
+                if (((titel[anzahl].trim().length() > 0) && (titel[anzahl] != null)) &&
+                    ((links[anzahl].trim().length() > 0) && (links[anzahl] != null))){
+                    anzahl++;
+                }
+            }
+            indexAnfang = s.indexOf("<a href=", indexAnfang+1);
+        }
+    }
+    
+    /**
+     * Diese Methode findet den Link in einem HTML-Code.
+     */
+    public static String findLink(String s) {
+        String ergebnis;
+        int indexAnfang = s.indexOf("<a href=\"");
+        int indexEnde   = s.indexOf("\">",indexAnfang);
+        ergebnis = s.substring(indexAnfang+9,indexEnde);
+        return ergebnis;
+    }
+    
+    /**
+     * Diese Methode findet den Titel in einem HTML-Code.
+     */
+    public static String findTitel(String s) {
+        String ergebnis;
+        int indexAnfang = s.indexOf("\">");
+        int indexEnde   = s.indexOf("</a>",indexAnfang);
+        ergebnis = s.substring(indexAnfang+2,indexEnde);
+        return ergebnis;
+    }
+           
+    /**
+     * Gibt alle gefundenen Titeln in einem String Array zurueck.
+     */
+    public static String[] getTitel() {
+        return titel;
+    }
+    
+    /**
+     * Gibt alle gefundenen Links in einem String Array zurueck.
+     */
+    public static String[] getLinks() {
+        return links;
+    }
+    
+    /**
+     * Gibt die Anzahl zu allen gefundenen Links zurueck.
+     */
+    public static int getAnzahl() {
+        return anzahl;
+    }
+
+}
